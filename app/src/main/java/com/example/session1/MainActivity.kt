@@ -40,13 +40,16 @@ class MainActivity : ComponentActivity() {
 }
 
 
+// App logic in this DiceRoll Composable function ! ! !
 @Composable
 fun DiceRoll() {
 
+    // result is a variable integer value which is mutable ! ! !
     var result by remember {
         mutableStateOf(1)
     }
 
+    // ImageResource is a variable which pass image in ImageView according to result ! ! !
     var ImageResource = when(result){
         1 -> R.drawable.dice_1
         2 -> R.drawable.dice_2
@@ -56,14 +59,20 @@ fun DiceRoll() {
         else -> R.drawable.dice_6
     }
 
+    // we using COLUMN  for placing views in Vertical Orientation ! ! !
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Image(painter = painterResource(ImageResource), contentDescription = result.toString())
 
+        //Image of Dice face according to result ! ! !
+        Image(painter = painterResource(ImageResource), contentDescription = "image")
+
+        // Spacer is use for giving space between the Views ! ! !
         Spacer(modifier = Modifier.height(100.dp))
+
+        // Generating random number by Button ! ! !
         Button(onClick = { result = (1..6).random() } , modifier = Modifier.height(80.dp).width(110.dp) ) {
             Text(text = "Roll" , fontSize = 30.sp)
         }
@@ -71,22 +80,10 @@ fun DiceRoll() {
     }
 }
 
+
+// getting preview of app! ! !
 @Preview
 @Composable
 fun DiceRollerAppPreview() {
     DiceRoll()
 }
-
-
-//@Composable
-//fun Greeting(name: String) {
-//    Text(text = "Hello $name!")
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun DefaultPreview() {
-//    Session1Theme {
-//        Greeting("Android")
-//    }
-//}
